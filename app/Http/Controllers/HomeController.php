@@ -32,27 +32,28 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-
-    public function update($id, Request $req)
+    protected function validator(array $data)
     {
-
-        $valid = Validator::make($req->all(),[
+        return Validator::make($data, [
             'name' => ['required', 'string', 'max:255','regex:/^\S*$/','alpha'],
             'surname' => ['required', 'string','regex:/^\S*$/','alpha','max:255',],
             'organization' => ['required','string', 'max:255',],
             'phone' => ['required', 'integer', 'digits_between:6,15'],
             'password' => ['required', 'string',  'confirmed'],
         ]);
+    }
+    public function update($id, Request $req)
+    {
+        $valid = $this->validator($req->all());
         if ($valid->fails()) {
-            return redirect()->route('home')
+            return redirect()->route('register')
                 ->withErrors($valid)
                 ->withInput();
         }
         $org = Organization::firstOrCreate([
             'name' => $req->input('organization')
         ]);
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->name = $req->input('name');
         $user->surname = $req->input('surname');
         $user->organization = $org->name;

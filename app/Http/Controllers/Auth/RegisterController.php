@@ -75,7 +75,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        die();
         $valid = $this->validator($data);
         if ($valid->fails()) {
             return redirect()->route('register')

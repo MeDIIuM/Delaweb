@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
@@ -15,7 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $users = DB::table('users')->get();
         $name = ['Андрей', 'Илья', 'Артем', 'Игорь', 'Дмитрий', 'Анатолий', 'Никита'];
         $surname = ['Петров', 'Голобородов', 'Карпов', 'Бутков', 'Журавлев', 'Торочкин', 'Куницын'];
         $organization = ['Спектрум', 'Колизей', 'Альта', 'Бубо', 'Лама', 'Параллель'];
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 "invite" => $name[array_rand($name, 1)],
                 "phone" => random_int(89000000000, 89999999999),
                 "organization" => $organization[array_rand($organization, 1)],
-                "password" => Str::random(10),
+                "password" => Hash::make('11111111'),
             ]);
         }
     }

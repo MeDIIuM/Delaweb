@@ -148,7 +148,11 @@
       <recent name="$PROJECT_DIR$/public/img" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.AuthTest.testNewUserRegistration">
+  <component name="RunManager" selected="PHPUnit.AuthTest.testExample">
+    <configuration name="AuthTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\AuthTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/AuthTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
     <configuration name="AuthTest.testExample" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Feature\AuthTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/AuthTest.php" method="testExample" scope="Method" />
       <method v="2" />
@@ -171,8 +175,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="PHPUnit.AuthTest.testNewUserRegistration" />
         <item itemvalue="PHPUnit.AuthTest.testExample" />
+        <item itemvalue="PHPUnit.AuthTest" />
+        <item itemvalue="PHPUnit.AuthTest.testNewUserRegistration" />
         <item itemvalue="PHPUnit.ExampleTest.testExample" />
         <item itemvalue="PHPUnit.ExampleTest.testBasicTest" />
       </list>
@@ -186,7 +191,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607933835870</updated>
-      <workItem from="1607933838549" duration="27894000" />
+      <workItem from="1607933838549" duration="29046000" />
     </task>
     <servers />
   </component>
