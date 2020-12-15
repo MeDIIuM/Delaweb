@@ -49,44 +49,47 @@ class RegisterController extends Controller
         $users = User::all();
         return view('auth.register', compact('users'));
     }
+
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
-
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255','regex:/^\S*$/','alpha'],
-            'surname' => ['required', 'string','regex:/^\S*$/','alpha','max:255',],
+            'name' => ['required', 'string', 'max:255', 'regex:/^\S*$/', 'alpha'],
+            'surname' => ['required', 'string', 'regex:/^\S*$/', 'alpha', 'max:255',],
             'invite' => ['required'],
-            'organization' => ['required','string', 'max:255',],
-            'phone' => ['required', 'integer','unique:users', 'digits_between:6,15'],
-            'password' => ['required', 'string',  'confirmed'],
+            'organization' => ['required', 'string', 'max:255',],
+            'phone' => ['required', 'integer', 'unique:users', 'digits_between:6,15'],
+            'password' => ['required', 'string', 'confirmed'],
         ]);
     }
-
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\Models\User
+     * @param array $data
+     * @return \Illuminate\Http\RedirectResponse
      */
     protected function create(array $data)
-    {   //conch
-        $org = DB::table('organization')->where('name',$data['organization'])->first();
-        if (!$org) {
-            DB::table('organization')->insert(
-                array('name' => $data['organization'])
-            );
+    {
+        die();
+        $valid = $this->validator($data);
+        if ($valid->fails()) {
+            return redirect()->route('register')
+                ->withErrors($valid)
+                ->withInput();
         }
+        $org = Organization::firstOrCreate([
+            'name' => $data['organization']
+        ]);
         return User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'phone' => $data['phone'],
-            'organization' => $data['organization'],
+            'organization' => $org['name'],
             'invite' => $data['invite'],
             'password' => Hash::make($data['password']),
         ]);

@@ -18,4 +18,12 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+    public function testExample()
+    {
+        $response = $this->get('/register');
+        $response->assertStatus(200);
+        $response->assertSee('Регистрация');
+        $response->assertSee('Фамилия пригласившего');
+
+    }
 }
